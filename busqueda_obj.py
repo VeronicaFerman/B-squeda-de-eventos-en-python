@@ -1,5 +1,5 @@
 class EventoObj:
-    def __init__(self, idEventos, idUsuarios, nombre, categoría, fecha, hora, descripcion, valorEntrada, capacidad, disponibilidad, ciudad, pais, direccion, tipo):
+    def __init__(self, idEventos, idUsuarios, nombre, categoría, fecha, hora, descripcion, valorEntrada, capacidad, disponibilidad, ciudad, pais, direccion, tipo, modalidad):
         self.idEventos = idEventos
         self.idUsuarios = idUsuarios
         self.nombre = nombre
@@ -14,4 +14,9 @@ class EventoObj:
         self.pais = pais
         self.direccion = direccion
         self.tipo = tipo
+        self.modalidad = modalidad
+class CategoriaObj:
+    def __init__(self, idcategorias_eventos, nombreCat):
+        self.idcategorias_eventos = idcategorias_eventos
+        self.nombreCat = nombreCat
 
