@@ -14,7 +14,12 @@ class EventoLogic(Logic):
             eventoList.append(newEvento)
         return eventoList
 
-    # polimorfismo
+    def getEventosById(self, id):
+        database = self.database
+        sql = f"SELECT * FROM eventbrite.eventos where idEventos = {id};"
+        rows = database.executeQueryOneRow(sql)
+        return rows
+
     def createEventoObj(self, idEventos, idUsuarios, nombre, categoría, fecha, hora, descripcion, valorEntrada, capacidad, disponibilidad, ciudad, pais, direccion, tipo):
         eventoObj = EventoObj(idEventos, idUsuarios, nombre, categoría, fecha, hora, descripcion, valorEntrada, capacidad, disponibilidad, ciudad, pais, direccion, tipo)
         return EventoObj
