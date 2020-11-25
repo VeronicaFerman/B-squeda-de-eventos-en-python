@@ -4,6 +4,27 @@ from prettytable import PrettyTable
 #Búsqueda general
 logic = EventoLogic()
 
+def detallesEventos():
+
+    id = int(input("¿Cuál es el id del evento que desea ver más detalles?  "))
+
+    eventoElegido = logic.getEventosById(id)
+    catEventoElegido = logic.getCategoriasByEvent(id)
+    tipoEventoElegido = logic.getTiposByEvent(id)
+    userEventoElegido = logic.getUserName(id)
+
+    print("----------------------------------------------------------------------------------------------")
+    print("La información adicional de este evento es: ")
+    print("\n")
+    print("El creador del evento es: "+ str(userEventoElegido['nombre']))
+    print("La categoría del evento es: "+ catEventoElegido['nombreCat'])
+    print("Descripción: "+ eventoElegido['descripcion'])
+    print("El valor de la entrada es: ($) "+ str(eventoElegido ['valorEntrada']))
+    print("La máxima capacidad de asistentes es: "+ str(eventoElegido['capacidad']) + " (personas)")
+    print("La cantidad de entradas disponibles es: "+ str(eventoElegido['disponibilidad']))
+    print("La dirección detallada de la ubicación del evento es: "+ eventoElegido['direccion'])
+    print("El tipo del evento es: "+ tipoEventoElegido['nombreTipo'])
+
 while True:
     print("Elija de qué manera desea realizar la búsqueda de eventos\n")
     print("(0) Salir de la búsqueda")
@@ -34,24 +55,7 @@ while True:
         print(table)
 
         #Evento seleccionado después de la búsqueda general
-        id = int(input("¿Cuál es el id del evento que desea ver más detalles?  "))
-
-        eventoElegido = logic.getEventosById(id)
-        catEventoElegido = logic.getCategoriasByEvent(id)
-        tipoEventoElegido = logic.getTiposByEvent(id)
-        userEventoElegido = logic.getUserName(id)
-
-        print("----------------------------------------------------------------------------------------------")
-        print("La información adicional de este evento es: ")
-        print("\n")
-        print("El creador del evento es: "+ str(userEventoElegido['nombre']))
-        print("La categoría del evento es: "+ catEventoElegido['nombreCat'])
-        print("Descripción: "+ eventoElegido['descripcion'])
-        print("El valor de la entrada es: ($) "+ str(eventoElegido ['valorEntrada']))
-        print("La máxima capacidad de asistentes es: "+ str(eventoElegido['capacidad']) + " (personas)")
-        print("La cantidad de entradas disponibles es: "+ str(eventoElegido['disponibilidad']))
-        print("La dirección detallada de la ubicación del evento es: "+ eventoElegido['direccion'])
-        print("El tipo del evento es: "+ tipoEventoElegido['nombreTipo'])
+        detallesEventos()
 
     elif option == 2:
         categoriaList = logic.getAllCategorias()
@@ -80,21 +84,4 @@ while True:
                             eventoObj.modalidad])
         print(table)
 
-        id = int(input("¿Cuál es el id del evento que desea ver más detalles?  "))
-
-        eventoElegido = logic.getEventosById(id)
-        catEventoElegido = logic.getCategoriasByEvent(id)
-        tipoEventoElegido = logic.getTiposByEvent(id)
-        userEventoElegido = logic.getUserName(id)
-
-        print("----------------------------------------------------------------------------------------------")
-        print("La información adicional de este evento es: ")
-        print("\n")
-        print("El creador del evento es: "+ str(userEventoElegido['nombre']))
-        print("La categoría del evento es: "+ catEventoElegido['nombreCat'])
-        print("Descripción: "+ eventoElegido['descripcion'])
-        print("El valor de la entrada es: ($) "+ str(eventoElegido ['valorEntrada']))
-        print("La máxima capacidad de asistentes es: "+ str(eventoElegido['capacidad']) + " (personas)")
-        print("La cantidad de entradas disponibles es: "+ str(eventoElegido['disponibilidad']))
-        print("La dirección detallada de la ubicación del evento es: "+ eventoElegido['direccion'])
-        print("El tipo del evento es: "+ tipoEventoElegido['nombreTipo'])
+        detallesEventos()
