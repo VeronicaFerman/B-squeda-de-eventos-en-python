@@ -20,3 +20,8 @@ class CategoriaObj:
         self.idcategorias_eventos = idcategorias_eventos
         self.nombreCat = nombreCat
 
+class TipoObj:
+    def __init__(self, idtipo_eventos, nombreTipo):
+        self.idtipo_eventos = idtipo_eventos
+        self.nombreTipo = nombreTipo
+

@@ -1,4 +1,4 @@
-from busqueda_obj import EventoObj, CategoriaObj
+from busqueda_obj import EventoObj, CategoriaObj, TipoObj
 from dx_logic import Logic
 
 class EventoLogic(Logic):
@@ -26,6 +26,19 @@ class EventoLogic(Logic):
             f"SELECT eventos.* FROM eventos inner join categorias_eventos "
             + f"on eventos.categoria = categorias_eventos.idcategorias_eventos "
             + f"where categorias_eventos.nombreCat = '{categoria}'"
+        )
+        eventoList = []
+        for element in data:
+            newEvento = self.createEventoObj(element)
+            eventoList.append(newEvento)
+        return eventoList
+    
+    def getEventosByTipo(self, tipo):
+        database = self.database
+        data = database.executeQueryRows(
+            f"SELECT eventos.* FROM eventos inner join tipo_eventos "
+            + f"on eventos.tipo = tipo_eventos.idtipo_eventos "
+            + f"where tipo_eventos.nombreTipo = '{tipo}'"
         )
         eventoList = []
         for element in data:
@@ -87,6 +100,15 @@ class EventoLogic(Logic):
             categoriaList.append(newCat)
         return categoriaList
 
+    def getAllTipos(self):
+        database = self.database
+        data = database.executeQueryRows("SELECT * FROM tipo_eventos;")
+        tipoList = []
+        for element in data:
+            newTipo = self.createTipoObj(element)
+            tipoList.append(newTipo)
+        return tipoList
+
     def getTiposByEvent(self, id):
         database = self.database
         sql = (
@@ -139,3 +161,14 @@ class EventoLogic(Logic):
             categoriaDict["nombreCat"]
         )
         return categoriaObj
+
+    def createTipoObj(self, idtipo_eventos, nombreTipo):
+        eventoObj = TipoObj(idtipo_eventos, nombreTipo)
+        return TipoObj
+
+    def createTipoObj(self, tipoDict):
+        tipoObj = TipoObj(
+            tipoDict["idtipo_eventos"],
+            tipoDict["nombreTipo"]
+        )
+        return tipoObj
