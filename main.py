@@ -4,6 +4,21 @@ from prettytable import PrettyTable
 #Búsqueda general
 logic = EventoLogic()
 
+def tablaEventos(eventoList):
+    table = PrettyTable()
+    table.field_names = ["IdEvento", "nombre", "fecha", "hora", "valorEntrada", "disponibilidad", "ciudad", "pais", "modalidad"]
+    for eventoObj in eventoList:
+        table.add_row([eventoObj.idEventos, 
+                        eventoObj.nombre,
+                        eventoObj.fecha, 
+                        eventoObj.hora, 
+                        eventoObj.valorEntrada, 
+                        eventoObj.disponibilidad, 
+                        eventoObj.ciudad, 
+                        eventoObj.pais,
+                        eventoObj.modalidad])
+    print(table)
+
 def detallesEventos():
 
     id = int(input("¿Cuál es el id del evento que desea ver más detalles?  "))
@@ -40,19 +55,7 @@ while True:
         break
     elif option == 1:
         eventoList = logic.getAllEventosFromSearch()
-        table = PrettyTable()
-        table.field_names = ["IdEvento", "nombre", "fecha", "hora", "valorEntrada", "disponibilidad", "ciudad", "pais", "modalidad"]
-        for eventoObj in eventoList:
-            table.add_row([eventoObj.idEventos, 
-                            eventoObj.nombre,
-                            eventoObj.fecha, 
-                            eventoObj.hora, 
-                            eventoObj.valorEntrada, 
-                            eventoObj.disponibilidad, 
-                            eventoObj.ciudad, 
-                            eventoObj.pais,
-                            eventoObj.modalidad])
-        print(table)
+        tablaEventos(eventoList)
 
         #Evento seleccionado después de la búsqueda general
         detallesEventos()
@@ -60,6 +63,7 @@ while True:
     elif option == 2:
         categoriaList = logic.getAllCategorias()
         table = PrettyTable()
+        table.title = 'Categorías'
         table.field_names = ["Id", "nombre"]
         for categoriaObj in categoriaList:
             table.add_row([categoriaObj.idcategorias_eventos, 
@@ -70,18 +74,33 @@ while True:
 
         eventoList = logic.getEventosByCategoria(categoria)
 
-        table = PrettyTable()
-        table.field_names = ["IdEvento", "nombre", "fecha", "hora", "valorEntrada", "disponibilidad", "ciudad", "pais", "modalidad"]
-        for eventoObj in eventoList:
-            table.add_row([eventoObj.idEventos, 
-                            eventoObj.nombre,
-                            eventoObj.fecha, 
-                            eventoObj.hora, 
-                            eventoObj.valorEntrada, 
-                            eventoObj.disponibilidad, 
-                            eventoObj.ciudad, 
-                            eventoObj.pais,
-                            eventoObj.modalidad])
-        print(table)
+        tablaEventos(eventoList)
 
+        detallesEventos()
+
+    elif option == 3:
+        date = str(input("Escriba la fecha (YYYY-MM-DD) en la que desea buscar eventos: "))
+
+        eventoList = logic.getEventosByDate(date)
+
+        tablaEventos(eventoList)
+
+        detallesEventos()
+
+    elif option == 4:
+        city = input("Escriba la ciudad en la que quiere buscar los eventos: ")
+        eventoList = logic.getEventosByCity(city)
+        tablaEventos(eventoList)
+        detallesEventos()
+
+    elif option == 5:
+        country = input("Escriba el país en el que quiere buscar los eventos: ")
+        eventoList = logic.getEventosByCountry(country)
+        tablaEventos(eventoList)
+        detallesEventos()
+
+    elif option == 6:
+        modality = input("Escriba la modalidad  (virtual o presencial) de los eventos que quiere buscar: ")
+        eventoList = logic.getEventosByModality(modality)
+        tablaEventos(eventoList)
         detallesEventos()

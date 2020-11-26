@@ -32,6 +32,42 @@ class EventoLogic(Logic):
             newEvento = self.createEventoObj(element)
             eventoList.append(newEvento)
         return eventoList
+    
+    def getEventosByDate(self, date):
+        database = self.database
+        data = database.executeQueryRows(f"SELECT * from eventos where eventos.fecha = '{date}'")
+        eventoList = []
+        for element in data:
+            newEvento = self.createEventoObj(element)
+            eventoList.append(newEvento)
+        return eventoList
+
+    def getEventosByCity(self, city):
+        database = self.database
+        data = database.executeQueryRows(f"SELECT * from eventos where eventos.ciudad = '{city}'")
+        eventoList = []
+        for element in data:
+            newEvento = self.createEventoObj(element)
+            eventoList.append(newEvento)
+        return eventoList
+    
+    def getEventosByCountry(self, country):
+        database = self.database
+        data = database.executeQueryRows(f"SELECT * from eventos where eventos.pais = '{country}'")
+        eventoList = []
+        for element in data:
+            newEvento = self.createEventoObj(element)
+            eventoList.append(newEvento)
+        return eventoList
+    
+    def getEventosByModality(self, modality):
+        database = self.database
+        data = database.executeQueryRows(f"SELECT * from eventos where eventos.modalidad = '{modality}'")
+        eventoList = []
+        for element in data:
+            newEvento = self.createEventoObj(element)
+            eventoList.append(newEvento)
+        return eventoList
 
     def getCategoriasByEvent(self, id):
         database = self.database
